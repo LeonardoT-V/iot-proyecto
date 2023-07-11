@@ -45,9 +45,6 @@ function Data() {
     .then((data) => data); */
   // console.log(hola);
 
-  const createNewMetric = () => {};
-  console.log(data);
-  createNewMetric();
   return (
     <Container>
       <div className="flex justify-center gap-2 items-center my-6">
@@ -70,7 +67,7 @@ function Data() {
         </h1>
       </div>
 
-      <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <table className="w-full text-sm text-left text-gray-500 ">
         <thead className="text-xs text-white uppercase bg-cyan-900 ">
           <tr>
             <th scope="col" className="px-6 py-3 rounded-l-lg">
@@ -89,10 +86,10 @@ function Data() {
         </thead>
         <tbody>
           {Object.entries(data).map(([key, value]) => (
-            <tr className="bg-white dark:bg-gray-800" key={key}>
+            <tr className="bg-white " key={key}>
               <th
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
               >
                 {key}
               </th>

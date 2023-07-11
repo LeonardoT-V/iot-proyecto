@@ -3,11 +3,12 @@ import Temperature from "../components/Temperature";
 import Humedad from "../components/Humedad";
 import Container from "../components/Container";
 import { useEffect, useState } from "react";
-import { child, onValue } from "firebase/database";
+import { child, limitToLast, onValue, query } from "firebase/database";
 import { database } from "../lib/firebase";
 
 export default function Home() {
   const [data, setData] = useState({});
+  const [key, setKey] = useState(0);
   // useEffect(() => {
   /* const interval = setInterval(() => {
       // setData(Math.floor(Math.random() * 100 + 1));
@@ -20,10 +21,22 @@ export default function Home() {
   // }, []);
 
   useEffect(() => {
-    onValue(child(database, "last-data/"), (snap) => {
+    const dbRef = query(child(database, "metrica/"), limitToLast(1));
+    onValue(dbRef, (snap) => {
+      console.log(snap.val());
+      snap.forEach((childSnap) => {
+        const childkey = childSnap.key;
+        const childVal = childSnap.val();
+        setKey(childkey);
+        setData(childVal);
+        console.log(key);
+      });
+      //setData(snap.val());
+    });
+    /* onValue(child(database, "last-data/"), (snap) => {
       console.log(snap.val());
       setData(snap.val());
-    });
+    }); */
   }, []);
 
   return (
@@ -42,9 +55,14 @@ export default function Home() {
           <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
           <path d="M12 7v5l3 3"></path>
         </svg>
-        <h1 className="text-4xl text-black/80 font-bold text-center">
-          RealTime Data
-        </h1>
+        <div className="flex items-center align-middle gap-2">
+          <h1 className="text-4xl text-black/80 font-bold text-center">
+            RealTime Data
+          </h1>
+          <span className="text-base text-yellow-500 bg-cyan-900 px-3 py-1 rounded-md font-bold">
+            {key}
+          </span>
+        </div>
       </div>
       <Container className="flex justify-center gap-16 h-full">
         <Humedad percentage={data.hum} />
