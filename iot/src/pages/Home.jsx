@@ -9,16 +9,6 @@ import { database } from "../lib/firebase";
 export default function Home() {
   const [data, setData] = useState({});
   const [key, setKey] = useState(0);
-  // useEffect(() => {
-  /* const interval = setInterval(() => {
-      // setData(Math.floor(Math.random() * 100 + 1));
-      onValue(child(database, "last-data/"), (snap) => {
-        console.log(snap.val());
-        setData(snap.val());
-      });
-    }, 5000); */
-  // return () => clearInterval(interval);
-  // }, []);
 
   useEffect(() => {
     const dbRef = query(child(database, "metrica/"), limitToLast(1));
@@ -31,12 +21,7 @@ export default function Home() {
         setData(childVal);
         console.log(key);
       });
-      //setData(snap.val());
     });
-    /* onValue(child(database, "last-data/"), (snap) => {
-      console.log(snap.val());
-      setData(snap.val());
-    }); */
   }, []);
 
   return (
@@ -59,9 +44,10 @@ export default function Home() {
           <h1 className="text-4xl text-black/80 font-bold text-center">
             RealTime Data
           </h1>
-          <span className="text-base text-yellow-500 bg-cyan-900 px-3 py-1 rounded-md font-bold">
-            {key}
-          </span>
+          <div className="flex gap-2 text-base  bg-cyan-900 px-3 py-1 rounded-md font-bold">
+            <p className="text-white">Ultimo dato: </p>
+            <span className="text-yellow-500">{key}</span>
+          </div>
         </div>
       </div>
       <Container className="flex justify-center gap-16 h-full">
