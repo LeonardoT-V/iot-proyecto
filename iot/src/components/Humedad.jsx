@@ -33,6 +33,7 @@ function Humedad({ percentage }) {
           value={percentage}
           text={`${percentage}%`}
           styles={buildStyles({
+            pathColor: "rgb(125 211 252 / 1)",
             textColor: "rgb(0 0 0 / 0.8)",
             trailColor: "rgb(209 213 219/ 0.2)",
           })}

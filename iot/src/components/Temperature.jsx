@@ -10,24 +10,6 @@ import React, { useEffect, useState } from "react";
 }; */
 
 function Temperature({ percentage }) {
-  const [stye, setStye] = useState("");
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // setUpdate(Math.floor(Math.random() * 100 + 1));
-      // setUpdate(28);
-      if (percentage < 15) {
-        setStye("#93c5fd");
-      } else if (percentage >= 16 && percentage <= 28) {
-        setStye("#86efac");
-      } else if (percentage > 28) {
-        setStye("#fca5a5");
-      }
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // const newObject = { ...config, ...update };
-
   return (
     <section className="w-full flex flex-col rounded-md gap-2 hover:scale-105 transition-all">
       <header className="flex items-center justify-center bg-cyan-900 py-3 rounded-md gap-1 rounded-b-none">
@@ -53,7 +35,7 @@ function Temperature({ percentage }) {
           minValue={-20}
           maxValue={40}
           styles={buildStyles({
-            pathColor: stye,
+            pathColor: "rgb(190 242 100 / 1)",
             textColor: "rgb(0 0 0 / 0.8)",
             trailColor: "rgb(209 213 219/ 0.2)",
           })}

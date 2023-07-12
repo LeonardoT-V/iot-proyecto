@@ -56,19 +56,19 @@ function Dashboard() {
             data={data}
             title="temperatura"
             toGraph="temp"
-            color={"#8884d8"}
+            color={"#84cc16"}
           />
           <ChartData
             data={data}
             title="humedad"
             toGraph="hum"
-            color={"#8884d8"}
+            color={"#0ea5e9"}
           />
           <ChartData
             data={data}
             title="humedad tierra"
             toGraph="earth"
-            color={"#8884d8"}
+            color={"#eab308"}
           />
         </section>
       </Container>
