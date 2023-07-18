@@ -64,26 +64,26 @@ struct SensorData {
   float hum;
 };
 
-void loop() {  
+void loop() {
 
   if (Firebase.ready() && (millis() - sendDataPrevMillis > timerDelay || sendDataPrevMillis == 0)){
     sendDataPrevMillis = millis();
     int valorHumedad = tierraSensor();
-      
+
     SensorData sensoresDht = readDhtSensor();
-    
-    
+
+
     timestamp = getTime();
     //Serial.println(timestamp);
     databasePath = "/metrica/"+ String(timestamp);
-    Serial.println(databasePath);    
+    Serial.println(databasePath);
     json.add("temp", sensoresDht.temp);
     json.add("hum", sensoresDht.hum);
     json.add("earth", valorHumedad);
 
     if (Firebase.RTDB.setJSON(&fbdo, databasePath.c_str(), &json)){
-      Serial.print("PASSED: Nuevo valor agregado: ");
-      //Serial.print(json.toString(Serial, true));            
+      Serial.println("PASSED: Nuevo valor agregado: ");
+      //Serial.print(json.toString(Serial, true));
       Serial.println("PATH: " + fbdo.dataPath());
       //Serial.println("TYPE: " + fbdo.dataType());
       Serial.print("Tierra: ");
@@ -92,7 +92,7 @@ void loop() {
       Serial.println(String(sensoresDht.hum, 1 ) );
       Serial.print("Temperatura: ");
       Serial.println(String(sensoresDht.temp, 1 ) );
-      Serial.println("###############");
+      Serial.println("###############################################");
     }
     else {
       Serial.println("FAILED");
@@ -118,7 +118,7 @@ struct SensorData readDhtSensor() {
   struct SensorData data;
   data.hum = dht.readHumidity();
   data.temp = dht.readTemperature();
-  
+
   if (isnan(data.hum) || isnan(data.temp)) { data.hum=0; data.temp=0; }
 
   return data;
